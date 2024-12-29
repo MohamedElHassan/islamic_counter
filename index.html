@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عداد الأذكار</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2980b9" />
+    <link rel="apple-touch-icon" href="icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="عداد الأذكار" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="menu-toggle">
+      <i class="fas fa-cog"></i>
+    </button>
+
+    <div class="sidebar">
+      <h3>الإعدادات</h3>
+      <div class="theme-option" onclick="toggleTheme()">
+        <i class="fas fa-moon ml-2"></i>
+        <span class="mr-2">الوضع الليلي</span>
+      </div>
+      <h3>الألوان</h3>
+      <div class="color-options">
+        <div
+          class="color-option"
+          onclick="setTheme('white')"
+          style="background: linear-gradient(135deg, #f5f5f5, #e0e0e0)"
+          title="أبيض"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('black')"
+          style="background: linear-gradient(135deg, #000000, #212121)"
+          title="أسود"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('blue')"
+          style="background: linear-gradient(135deg, #1a237e, #0d47a1)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('green')"
+          style="background: linear-gradient(135deg, #1b5e20, #2e7d32)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('purple')"
+          style="background: linear-gradient(135deg, #4a148c, #6a1b9a)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('teal')"
+          style="background: linear-gradient(135deg, #004d40, #00695c)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('orange')"
+          style="background: linear-gradient(135deg, #e65100, #ef6c00)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('pink')"
+          style="background: linear-gradient(135deg, #880e4f, #ad1457)"
+        ></div>
+        <div
+          class="color-option"
+          onclick="setTheme('indigo')"
+          style="background: linear-gradient(135deg, #1a237e, #283593)"
+        ></div>
+      </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <h1 class="app-title">عداد الأذكار</h1>
+
+    <div class="container">
+      <div class="stopwatch-cards">
+        <div class="card stopwatch-card" id="work-stopwatch">
+          <h2>العمل</h2>
+          <div class="time-display">
+            <span id="work-hours">00</span>:<span id="work-minutes">00</span>:<span id="work-seconds">00</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="work-progress"></div>
+          </div>
+          <div class="goal-text">الهدف: 8 ساعات</div>
+          <div class="controls">
+            <button class="start-btn" onclick="toggleStopwatch('work')">
+              <i class="fas fa-play"></i>
+            </button>
+            <button class="reset-btn" onclick="showStopwatchResetConfirmation('work')">
+              <i class="fas fa-undo"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="card stopwatch-card" id="worship-stopwatch">
+          <h2>العبادة</h2>
+          <div class="time-display">
+            <span id="worship-hours">00</span>:<span id="worship-minutes">00</span>:<span id="worship-seconds">00</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" id="worship-progress"></div>
+          </div>
+          <div class="goal-text">الهدف: 8 ساعات</div>
+          <div class="controls">
+            <button class="start-btn" onclick="toggleStopwatch('worship')">
+              <i class="fas fa-play"></i>
+            </button>
+            <button class="reset-btn" onclick="showStopwatchResetConfirmation('worship')">
+              <i class="fas fa-undo"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="counter-container">
+      <h2>الصلاة على النبي ﷺ</h2>
+      <p class="dhikr-text">
+        اللهم صلي وسلم وبارك على سيدنا محمد وعلى آله وصحبه وسلم تسليماً كثيرا
+      </p>
+      <div class="counter" id="counter1">0</div>
+      <div class="progress-bar">
+        <div class="progress" id="progress1"></div>
+      </div>
+      <p class="goal">الهدف: 1000</p>
+      <div class="button-container">
+        <button onclick="increment(1)" class="increment-btn">+33</button>
+        <button onclick="showResetConfirmation(1)" class="reset-btn">
+          <i class="fas fa-undo"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="counter-container">
+      <h2>التسبيح</h2>
+      <p class="dhikr-text">
+        سبحان الله والحمدلله ولا إله إلا الله والله أكبر ولا حول ولا قوة إلا
+        بالله
+      </p>
+      <div class="counter" id="counter2">0</div>
+      <div class="progress-bar">
+        <div class="progress" id="progress2"></div>
+      </div>
+      <p class="goal">الهدف: 1000</p>
+      <div class="button-container">
+        <button onclick="increment(2)" class="increment-btn">+33</button>
+        <button onclick="showResetConfirmation(2)" class="reset-btn">
+          <i class="fas fa-undo"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="counter-container">
+      <h2>قراءة القرآن الكريم</h2>
+      <p class="dhikr-text">عدد الأجزاء المقروءة من القرآن الكريم</p>
+      <div class="counter" id="counter3">0</div>
+      <div class="progress-bar">
+        <div class="progress" id="progress3"></div>
+      </div>
+      <p class="goal">الهدف: 4 أجزاء</p>
+      <div class="button-container">
+        <button onclick="incrementQuran(3)" class="increment-btn">+1</button>
+        <button onclick="showResetConfirmation(3)" class="reset-btn">
+          <i class="fas fa-undo"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Confirmation Modal -->
+    <div class="modal" id="resetConfirmModal">
+      <div class="modal-content">
+        <h3>تأكيد إعادة العداد</h3>
+        <p>هل أنت متأكد من إعادة العداد إلى الصفر؟</p>
+        <div class="modal-buttons">
+          <button id="confirmReset" class="confirm-btn">نعم</button>
+          <button id="cancelReset" class="cancel-btn">لا</button>
+        </div>
+      </div>
+    </div>
+    <!-- Stopwatch Reset Confirmation Modal -->
+    <div id="stopwatchResetModal" class="modal">
+      <div class="modal-content">
+        <h3>تأكيد إعادة الضبط</h3>
+        <p>هل أنت متأكد من إعادة ضبط المؤقت؟</p>
+        <div class="modal-buttons">
+          <button id="confirmStopwatchReset" class="confirm-btn">نعم</button>
+          <button id="cancelStopwatchReset" class="cancel-btn">لا</button>
+        </div>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "ServiceWorker registered successfully:",
+                registration
+              );
+            })
+            .catch((error) => {
+              console.log("ServiceWorker registration failed:", error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
